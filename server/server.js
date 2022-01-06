@@ -1,9 +1,11 @@
 const express = require('express')
-const spotifyWebApi = require('spotify-web-api-node')
 
 const app = express()
 
 require('dotenv').config()
+
+const routes = require('./routes/routes')
+app.use('/', routes)
 
 const port = process.env.PORT || 5000
 
