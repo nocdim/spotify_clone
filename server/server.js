@@ -4,7 +4,7 @@ const app = express()
 
 require('dotenv').config()
 
-const routes = require('./routes/routes')
+const routes = require('./routes/routes.js')
 app.use('/', routes)
 
 const port = process.env.PORT || 5000
