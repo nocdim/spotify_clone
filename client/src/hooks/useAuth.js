@@ -11,6 +11,8 @@ const useAuth = (code) => {
             code,
         }).then(res => {
             console.log(res.data)
+        }).catch(() => {
+            window.location = '/'
         })
     }, [code])
 }
