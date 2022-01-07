@@ -39,3 +39,7 @@ exports.refresh_complete = (req, res) => {
             res.sendStatus(400)
         });
 }
+
+exports.lyrics = async (req, res) => {
+    const lyrics
+}

@@ -16,11 +16,26 @@ const Dashboard = ({ code }) => {
     const [search, setSearch] = useState('')
     const [searchResults, setSearchResults] = useState([])
     const [playingTrack, setPlayingTrack] = useState()
+    const [lyrics, setLyrics] = useState('')
 
     let chooseTrack = (track) => {
         setPlayingTrack(track)
         setSearch('')
+        setLyrics('')
     }
+
+    useEffect(() => {
+        if (!playingTrack) return
+
+        axios.get('http://localhost:5000/lyrics', {
+            params: {
+                track: playingTrack.title,
+                artist: playingTrack.artist
+            }
+        }).then(res => {
+            setLyrics(res.data.lyrics)
+        })
+    }, [playingTrack])
 
     useEffect(() => {
         if (!accessToken) return
@@ -65,6 +80,11 @@ const Dashboard = ({ code }) => {
                 {searchResults.map(track => (
                     <TrackSearchResult track={track} key={track.uri} chooseTrack={chooseTrack} />
                 ))}
+                {searchResults.length === 0 && (
+                    <div className="text-center" style={{ whiteSpace: "pre" }}>
+                        {lyrics}
+                    </div>
+                )}
             </div>
             <div><Player accessToken={accessToken} trackUri={playingTrack?.uri} /></div>
         </Container>
