@@ -4,6 +4,7 @@ import { Container, Form } from 'react-bootstrap'
 import SpotifyWebApi from 'spotify-web-api-node'
 import TrackSearchResult from './TrackSearchResult'
 import Player from './Player'
+import axios from 'axios'
 
 const spotifyApi = new SpotifyWebApi({
     clientId: "6eb3c097176f4ca1a1948d33f539a4a2"

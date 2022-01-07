@@ -1,4 +1,5 @@
 const SpotifyWebApi = require('spotify-web-api-node')
+const lyricsFinder = require('lyrics-finder')
 
 exports.login_complete = (req, res) => {
     const code = req.body.code
@@ -41,5 +42,6 @@ exports.refresh_complete = (req, res) => {
 }
 
 exports.lyrics = async (req, res) => {
-    const lyrics
+    const lyrics = await lyricsFinder(req.query.artist, req.query.track) || "No Lyrics Found"
+    res.json({ lyrics })
 }
